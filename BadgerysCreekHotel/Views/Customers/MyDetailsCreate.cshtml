@@ -1,0 +1,48 @@
+﻿@model BadgerysCreekHotel.Models.Customer
+
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> UserManager
+
+
+@{
+    ViewData["Title"] = "My Details";
+}
+<h2>My Details</h2>
+
+<h4>Welcome, @UserManager.GetUserName(User)! You should enter your details below before browsing other links. </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @* The form action should be /MovieGoers/MyDetailsCreate . *@
+        <form asp-action="MyDetailsCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* This hidden field is necessary, as the web form must contain it to
+                make all properties of the MovieGoer class present. *@
+            <input type="hidden" asp-for="Email" />
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GivenName" class="control-label"></label>
+                <input asp-for="GivenName" class="form-control" />
+                <span asp-validation-for="GivenName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostNumber" class="control-label"></label>
+                <input asp-for="PostNumber" class="form-control" />
+                <span asp-validation-for="PostNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

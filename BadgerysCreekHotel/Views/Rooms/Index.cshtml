@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BadgerysCreekHotel.Models.Room>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+@if (User.IsInRole("Administrators"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<form asp-controller="Rooms" asp-action="Index" class="form-inline" method="get">
+    <div class="form-group">
+        <label for="searchingString" class="control-label">Bedcount : </label>
+        <input type="text" name="searchingString" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn" />
+    </div>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Level)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BedCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (User.IsInRole("Customers"))
+        {
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BedCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+            }
+
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BedCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.RoomID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.RoomID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.RoomID">Delete</a>
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

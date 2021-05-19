@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BadgerysCreekHotel.Models.ViewModels.Statistics>
+
+@{
+    ViewData["Title"] = "Statistics";
+}
+
+<h2>Statistics</h2>
+
+<h2>Customer distribution with respect to postcodes</h2>
+
+    <div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m => m.PostCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.NumOfCusotmer)
+                </th>
+            </tr>
+
+            @foreach (var item in ViewBag.Group1)
+            {
+                <tr>
+                    <td>
+                        @item.PostCode
+                    </td>
+                    <td>
+                        @item.NumOfCusotmer
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+<h2>Booking distribution with respect to rooms</h2>
+    <div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m => m.RoomID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.NumOfBooking)
+                </th>
+            </tr>
+
+            @foreach (var item in ViewBag.Group2)
+            {
+                <tr>
+                    <td>
+                        @item.RoomID
+                    </td>
+                    <td>
+                        @item.NumOfBooking
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+
